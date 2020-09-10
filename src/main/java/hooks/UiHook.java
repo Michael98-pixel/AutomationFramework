@@ -32,8 +32,8 @@ public class UiHook {
     public void setupWebDriver() {
         logger.debug("Chrome driver Set UP");
         WebDriver driver = Browser.getBrowser();
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         logger.info("Window is maximized");
     }

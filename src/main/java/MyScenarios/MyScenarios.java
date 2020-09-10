@@ -43,6 +43,7 @@ public class MyScenarios {
             throws InvocationTargetException, NoSuchMethodException, ClassNotFoundException, InstantiationException, IllegalAccessException,
                 InterruptedException {
             Thread.sleep(3000);
+
             AbstractPage page = ReflectionUtils.getPageObject(pageName);
             MatcherAssert.assertThat(Browser.getBrowser().getCurrentUrl(), containsString(page.getPageUrl()));
             ScenarioContext.setContext(CURRENT_PAGE.name(), page);
@@ -66,6 +67,7 @@ public class MyScenarios {
         }
         @And("{string} is displayed")
         public void RegistrationFormIsDisplayed(String registration) throws InterruptedException, IllegalAccessException {
+          Thread.sleep(2000);
             WebElement element = ReflectionUtils.getWebElement(registration);
             MatcherAssert.assertThat(element.isDisplayed(), is(true));
             logger.info("Registration form is open {}", registration);
@@ -79,6 +81,7 @@ public class MyScenarios {
 
         WebElement element1 = ReflectionUtils.getWebElement(elementName1);
         element1.sendKeys("GoodPass123");
+        ScreenshotUtils.takeScreenshot(elementName1);
     }
 
     @Then("{string} message is displayed")

@@ -2,7 +2,6 @@ package MyScenarios;
 
 import com.itstep.aliexpress.Browser;
 import com.itstep.aliexpress.ReflectionUtils;
-import com.itstep.aliexpress.ScenarioContext;
 import com.itstep.aliexpress.ScreenshotUtils;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -13,24 +12,25 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pages.AbstractPage;
 
-import java.lang.reflect.InvocationTargetException;
-
-import static com.itstep.aliexpress.ScenarioDataKey.CURRENT_PAGE;
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 
 public class My3Scenario {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Given("user navigates to {string} page and {string} button is displayed")
-    public void userNavigatesToTheSite(String url, String signIn) throws IllegalAccessException {
+    @Given("user navigates to {string}   page")
+    public void userNavigatesToTheSite(String url) throws IllegalAccessException, InterruptedException {
         Browser.getBrowser().navigate().to(url);
         logger.info("User navigates to {}", url);
-        WebElement button = ReflectionUtils.getWebElement(signIn);
-        ScreenshotUtils.takeScreenshotOfElement(signIn, button);
-        MatcherAssert.assertThat(button.isDisplayed(), is(true));
+        Thread.sleep(3000);
+
+    }
+
+    @And("{string}   button is displayed")
+    public void buttonIsDisplayed(String signIn) throws IllegalAccessException {
+        WebElement element = ReflectionUtils.getWebElement(signIn);
+        ScreenshotUtils.takeScreenshotOfElement(signIn, element);
+        MatcherAssert.assertThat(element.isDisplayed(), is(true));
         logger.info("Button  {} is displayed", signIn);
     }
 
@@ -43,7 +43,8 @@ public class My3Scenario {
     }
 
     @Then("{string}  form is displayed")
-    public void SignInFOrmIsDisplayed(String form) throws IllegalAccessException {
+    public void SignInFOrmIsDisplayed(String form) throws IllegalAccessException, InterruptedException {
+        Thread.sleep(2000);
         WebElement element = ReflectionUtils.getWebElement(form);
         ScreenshotUtils.takeScreenshotOfElement(form, element);
         MatcherAssert.assertThat(element.isDisplayed(), is(true));
@@ -53,6 +54,7 @@ public class My3Scenario {
     @And("user fills the existing {string} and {string} fields")
     public void userTypesExistingCredentials(String elementName, String elementName1) throws IllegalAccessException, InterruptedException {
         Thread.sleep(5000);
+        Browser.getBrowser().switchTo().frame("alibaba-login-box");
         WebElement element = ReflectionUtils.getWebElement(elementName);
         element.sendKeys("mihai52191821@gmail.com");
 
@@ -68,10 +70,12 @@ public class My3Scenario {
         logger.info("User clicks on {} button", sub);
         Thread.sleep(2000);
     }
-    @Then  ("Mihai user is logged in message is displayed")
-    public void successfullyLogin(String screen){
+
+    @Then("Mihai user is logged in message is displayed")
+    public void successfullyLogin() {
+        Browser.getBrowser().switchTo().defaultContent();
         MatcherAssert.assertThat(Browser.getBrowser().findElement(By.xpath("//span[contains(text(),'Hi, Mihai')]")).getText().contains("Hi, Mihai"), is(true));
         logger.info("User is logged in successfully!");
-        ScreenshotUtils.takeScreenshot(screen);
+        ScreenshotUtils.takeScreenshot("Mihai loged in");
     }
 }

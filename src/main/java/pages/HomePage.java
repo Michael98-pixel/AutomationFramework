@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends AbstractPage {
 
+
     @FindBy(css = "#search-key")
     private WebElement search;
 
@@ -14,7 +15,7 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//div[@class='batman batman-dialog']")
     private WebElement form;
 
-    @FindBy (xpath = "//span[@class='register-btn']//a[contains(text(),'Sign in')]")
+    @FindBy (xpath = "//span[@class='register-btn']")
     private  WebElement signIn;
 
     @FindBy( className="next-dialog-body")
@@ -30,10 +31,15 @@ public class HomePage extends AbstractPage {
     @FindBy(css= "#fm-login-id")
     private WebElement login;
 
+    @FindBy(css= "#fm-login-password")
+    private WebElement pass;
+
     @FindBy(className = "submit")
     private WebElement submit;
+
     @FindBy(css = "#login-form > div.fm-btn > button")
     private WebElement sub;
+
 
     @FindBy(xpath = "//div[@class='success-mark']")
 private  WebElement welcome;

@@ -8,7 +8,7 @@ public class Browser {
     private static WebDriver driver;
 
     private Browser() {
-        System.setProperty("webdriver.chrome.driver", "C:/Program Files/JetBrains/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver();
     }
 
@@ -22,18 +22,6 @@ public class Browser {
         driver.quit();
         driver = null;
     }
-//    @Override
-//
-//    public ArrayList<String> getTabList(){
-//        return new ArrayList<>(this.driver.getWindowHandles());
-//    }
-//     public void switchToLastTab(){
-//        this.driver.switchTo().window(getLastTab());
-//         Log.info("Driver switched to " + this.driver.getTitle()+ " tab");
-//}
-//public String getLastTab(){
-//        return getTabList().get(getTabList().size()-1);
-//
-//}
+
 
 }
