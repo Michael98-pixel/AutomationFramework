@@ -33,6 +33,4 @@ public class ItemPage extends AbstractPage{
 
         return "https://www.aliexpress.com/item/";
     }
-
 }
-

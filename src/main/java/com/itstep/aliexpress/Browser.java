@@ -22,6 +22,4 @@ public class Browser {
         driver.quit();
         driver = null;
     }
-
-
 }

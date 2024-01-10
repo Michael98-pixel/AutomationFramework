@@ -62,7 +62,4 @@ private  WebElement xiaomi;
     public String getPageUrl() {
         return "https://www.aliexpress.com/";
     }
-
 }
-
-
